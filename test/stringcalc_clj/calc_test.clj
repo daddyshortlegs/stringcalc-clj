@@ -8,3 +8,7 @@
     (is (= 4 (add "4")))
     (is (= 3 (add "1,2")))
     )
+
+(deftest arbitrary-number-size
+  (is (= 45 (add "1,2,3,4,5,6,7,8,9")))
+  )
