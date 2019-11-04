@@ -1,7 +1,7 @@
-(ns stringcalc-clj.core-test
+(ns stringcalc-clj.calc-test
   (:require [clojure.test :refer :all]
-            [stringcalc-clj.core :refer :all]))
+            [stringcalc-clj.calc :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+
+(deftest simple-calculator
+    (is (= 0 (add ""))))
