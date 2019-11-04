@@ -6,7 +6,7 @@
 (defn add [values]
   (cond
     (= values "") 0
-    :else   (->> (str/split values #",")
+    :else   (->> (str/split values #",|\n")
                  (map #(Integer/parseInt %))
                  (reduce +))
     )
