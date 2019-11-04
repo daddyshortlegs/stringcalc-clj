@@ -4,4 +4,6 @@
 
 
 (deftest simple-calculator
-    (is (= 0 (add ""))))
+    (is (= 0 (add "")))
+    (is (= 4 (add "4")))
+    )
