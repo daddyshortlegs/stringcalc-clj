@@ -16,3 +16,6 @@
 (deftest newline-separator
   (is (= 6 (add "1\n2,3")))
   )
+
+(deftest custom-separators
+  (is (= 3 (add "//;\n1;2"))))
