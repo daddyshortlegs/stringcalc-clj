@@ -10,11 +10,16 @@
   (and (str/includes? input "//") (str/includes? input "\n"))
   )
 
+(defn sum-values [values matcher]
+  (->> (str/split values matcher)
+       (map #(Integer/parseInt %))
+       (filter #(< % 1001))
+       (reduce +))
+  )
+
 (defn sum-values-custom-delimiter [values delimiter]
   (let [matcher (re-pattern (str delimiter "|\n"))]
-    (->> (str/split values matcher)
-         (map #(Integer/parseInt %))
-         (reduce +))
+    (sum-values values matcher)
     )
   )
 
