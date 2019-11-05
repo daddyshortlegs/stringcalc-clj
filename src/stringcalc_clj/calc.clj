@@ -16,18 +16,21 @@
        (reduce +))
   )
 
-(defn sum-values-custom-delimiter [values]
-  (->> (str/split values #";|\n")
-       (map #(Integer/parseInt %))
-       (reduce +))
+(defn sum-values-custom-delimiter [values delimiter]
+  (let [matcher (re-pattern (str delimiter "|\n"))]
+    (->> (str/split values matcher)
+         (map #(Integer/parseInt %))
+         (reduce +))
+    )
   )
+
 
 
 (defn total-values [values]
   (if (has-delimiter? values)
     (let [delimiter (get-delimiter values)
           rest-of-string (subs values (+ 1 (str/index-of values "\n")))]
-      (sum-values-custom-delimiter rest-of-string)
+      (sum-values-custom-delimiter rest-of-string ";")
       )
     (sum-values values)
     )
