@@ -22,7 +22,7 @@
   (if (has-delimiter? values)
     (let [delimiter (get-delimiter values)
           rest-of-string (subs values (+ 1 (str/index-of values "\n")))]
-      (sum-values-custom-delimiter rest-of-string ";")
+      (sum-values-custom-delimiter rest-of-string delimiter)
       )
     (sum-values-custom-delimiter values ",")
     )

@@ -19,5 +19,5 @@
 
 (deftest custom-separators
   (is (= 3 (add "//;\n1;2")))
-  ;(is (= 3 (add "//:\n1:2")))
+  (is (= 3 (add "//:\n1:2")))
   )
