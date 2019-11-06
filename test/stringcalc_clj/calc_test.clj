@@ -22,6 +22,10 @@
   (is (= 3 (add "//:\n1:2")))
   )
 
+(deftest disallow-negatives
+  (is (thrown-with-msg? RuntimeException #"error: negatives not allowed: -2 -3" (add "1,-2,-3"))
+      ))
+
 (deftest ignore-numbers-greater-than-1000
   (is (= 2 (add "1001,2")))
   )

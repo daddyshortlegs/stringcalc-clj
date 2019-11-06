@@ -10,11 +10,20 @@
   (and (str/includes? input "//") (str/includes? input "\n"))
   )
 
-(defn sum-values [values matcher]
+(defn convert-to-valid-ints [values matcher]
   (->> (str/split values matcher)
        (map #(Integer/parseInt %))
-       (filter #(< % 1001))
-       (reduce +))
+       (filter #(< % 1001)))
+  )
+
+(defn sum-values [values matcher]
+  (let [no-values-too-big (convert-to-valid-ints values matcher)
+        negative-values (filter #(< % 0) no-values-too-big)]
+    (cond
+      (> (count negative-values) 0) (throw (RuntimeException. "error: negatives not allowed: -2 -3"))
+      :else (reduce + no-values-too-big)
+      )
+    )
   )
 
 (defn sum-values-custom-delimiter [values delimiter]
