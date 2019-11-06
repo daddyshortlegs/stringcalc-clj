@@ -16,11 +16,15 @@
        (filter #(< % 1001)))
   )
 
+(defn create-error-msg [negatives]
+  (str "error: negatives not allowed:" (reduce #(str %1 " " %2) "" negatives))
+  )
+
 (defn sum-values [values matcher]
   (let [no-values-too-big (convert-to-valid-ints values matcher)
         negative-values (filter #(< % 0) no-values-too-big)]
     (cond
-      (> (count negative-values) 0) (throw (RuntimeException. "error: negatives not allowed: -2 -3"))
+      (> (count negative-values) 0) (throw (RuntimeException. (create-error-msg negative-values)))
       :else (reduce + no-values-too-big)
       )
     )
