@@ -35,16 +35,28 @@
   )
 
 (defn get-delimiter [input]
-  (subs input (+ (str/index-of input "//") 2) (str/index-of input "\n")))
+  (if (has-delimiter? input)
+    (subs input (+ (str/index-of input "//") 2) (str/index-of input "\n"))
+    ","
+    )
+  )
 
+(defn get-rest-of-string [values]
+  (if (has-delimiter? values)
+    (let [pos-of-new-line (str/index-of values "\n")]
+      (if (= pos-of-new-line nil)
+        values
+        (subs values (+ pos-of-new-line 1))
+        )
+      )
+    values
+    )
+  )
 
 (defn total-values [values]
-  (if (has-delimiter? values)
-    (let [delimiter (get-delimiter values)
-          rest-of-string (subs values (+ 1 (str/index-of values "\n")))]
-      (sum-values-custom-delimiter rest-of-string delimiter)
-      )
-    (sum-values-custom-delimiter values ",")
+  (let [delimiter (get-delimiter values)
+        rest-of-string (get-rest-of-string values)]
+    (sum-values-custom-delimiter rest-of-string delimiter)
     )
   )
 
