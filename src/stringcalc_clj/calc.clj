@@ -6,6 +6,7 @@
 
 (defn convert-to-valid-ints [values matcher]
   (->> (str/split values matcher)
+       (filter #(not (= "" %)))
        (map #(Integer/parseInt %))
        (filter #(< % 1001)))
   )
@@ -33,21 +34,9 @@
 (defn has-delimiter? [input]
   (and (str/includes? input "//") (str/includes? input "\n")))
 
-(defn get-delimiter-command [input]
+(defn get-delimiter [input]
   (subs input (+ (str/index-of input "//") 2) (str/index-of input "\n"))
   )
-
-(defn get-delimiter [input]
-  (if (has-delimiter? input)
-    (get-delimiter-command input)
-    ","
-    )
-  )
-
-
-(defn is-arbitary-length-separator [input]
-  (and (str/starts-with? input "[") (str/ends-with? input "]")))
-
 
 (defn get-rest-of-string [values]
   (if (has-delimiter? values)
@@ -61,8 +50,15 @@
     )
   )
 
+(defn get-control-string [input]
+  (if (has-delimiter? input)
+    (get-delimiter input)
+    ","
+    )
+  )
+
 (defn total-values [values]
-  (let [delimiter (get-delimiter values)
+  (let [delimiter (get-control-string values)
         rest-of-string (get-rest-of-string values)]
     (sum-values-custom-delimiter rest-of-string delimiter)
     )

@@ -31,5 +31,5 @@
   (is (= 2 (add "1001,2")))
   )
 
-;(deftest arbitrary-length-separators
-;  (is (= 3 (add "//[***]\n1***2***3"))))
+(deftest arbitrary-length-separators
+  (is (= 6 (add "//[***]\n1***2***3"))))
