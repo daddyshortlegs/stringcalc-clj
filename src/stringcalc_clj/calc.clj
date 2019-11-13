@@ -3,12 +3,6 @@
 
 (require '[clojure.string :as str])
 
-(defn get-delimiter [input]
-  (subs input (+ (str/index-of input "//") 2) (str/index-of input "\n")))
-
-(defn has-delimiter? [input]
-  (and (str/includes? input "//") (str/includes? input "\n"))
-  )
 
 (defn convert-to-valid-ints [values matcher]
   (->> (str/split values matcher)
@@ -35,6 +29,14 @@
     (sum-values values matcher)
     )
   )
+
+(defn has-delimiter? [input]
+  (and (str/includes? input "//") (str/includes? input "\n"))
+  )
+
+(defn get-delimiter [input]
+  (subs input (+ (str/index-of input "//") 2) (str/index-of input "\n")))
+
 
 (defn total-values [values]
   (if (has-delimiter? values)
