@@ -31,15 +31,23 @@
   )
 
 (defn has-delimiter? [input]
-  (and (str/includes? input "//") (str/includes? input "\n"))
+  (and (str/includes? input "//") (str/includes? input "\n")))
+
+(defn get-delimiter-command [input]
+  (subs input (+ (str/index-of input "//") 2) (str/index-of input "\n"))
   )
 
 (defn get-delimiter [input]
   (if (has-delimiter? input)
-    (subs input (+ (str/index-of input "//") 2) (str/index-of input "\n"))
+    (get-delimiter-command input)
     ","
     )
   )
+
+
+(defn is-arbitary-length-separator [input]
+  (and (str/starts-with? input "[") (str/ends-with? input "]")))
+
 
 (defn get-rest-of-string [values]
   (if (has-delimiter? values)

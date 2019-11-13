@@ -30,3 +30,6 @@
 (deftest ignore-numbers-greater-than-1000
   (is (= 2 (add "1001,2")))
   )
+
+;(deftest arbitrary-length-separators
+;  (is (= 3 (add "//[***]\n1***2***3"))))
