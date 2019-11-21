@@ -36,3 +36,6 @@
 
 (deftest multiple-single-length-separators
   (is (= 6 (add "//[*][%]\n1*2%3"))))
+
+(deftest multiple-longer-length-separators
+  (is (= 6 (add "//[foo][bar]\n1foo2bar3"))))
