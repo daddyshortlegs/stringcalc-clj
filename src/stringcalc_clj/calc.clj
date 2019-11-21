@@ -35,8 +35,9 @@
   (and (str/includes? input "//") (str/includes? input "\n")))
 
 (defn get-delimiter [input]
-  (subs input (+ (str/index-of input "//") 2) (str/index-of input "\n"))
-  )
+  (let [delimiter (subs input (+ (str/index-of input "//") 2) (str/index-of input "\n"))]
+    (str/replace delimiter "][" "]|[")
+  ))
 
 (defn get-rest-of-string [values]
   (if (has-delimiter? values)

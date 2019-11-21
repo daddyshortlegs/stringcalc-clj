@@ -33,3 +33,6 @@
 
 (deftest arbitrary-length-separators
   (is (= 6 (add "//[***]\n1***2***3"))))
+
+(deftest multiple-single-length-separators
+  (is (= 6 (add "//[*][%]\n1*2%3"))))
